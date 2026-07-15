@@ -1,0 +1,17 @@
+services:
+  bitbucket-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: runner-bitbucket
+    restart: unless-stopped
+    env_file:
+      - .env
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./workspace:/tmp
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+
+    environment:
+      TZ: Asia/Karachi
